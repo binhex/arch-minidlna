@@ -10,6 +10,9 @@ RUN pacman -Sy --noconfirm
 # run pacman to install application
 RUN pacman -S minidlna --noconfirm
 
+# copy start script to copy minidlna.conf file to/from host
+ADD start.sh /run/minidlna/start.sh
+
 # docker settings
 #################
 
