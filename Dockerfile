@@ -10,7 +10,7 @@ RUN pacman -Sy --noconfirm
 # run pacman to install application
 RUN pacman -S minidlna --noconfirm
 
-# copy start script to copy minidlna.conf file to/from host
+# add start script - copies minidlna.conf file to/from host
 ADD start.sh /run/minidlna/start.sh
 
 # docker settings
@@ -18,6 +18,9 @@ ADD start.sh /run/minidlna/start.sh
 
 # map /config to host defined config path (used to store configuration from app)
 VOLUME /config
+
+# map /media to host defined media path (used to read/write to media library)
+VOLUME /media
 
 # set permissions
 #################
