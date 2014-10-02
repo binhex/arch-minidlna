@@ -10,8 +10,13 @@ RUN pacman -Sy --noconfirm
 # run pacman to install application
 RUN pacman -S minidlna --noconfirm
 
-# add custom minidlna config file - defines media, db, and logs
-ADD minidlna.conf /etc/minidlna.conf
+# modify default minidlna.conf - defines media, db, and logs
+RUN sed -i 's/media_dir=\/opt/media_dir=\/media/g' /etc/minidlna.conf
+RUN sed -i 's/#db_dir=\/var\/cache\/minidlna/db_dir=\/config/g' /etc/minidlna.conf
+RUN sed -i 's/#log_dir=\/var\/log/log_dir=\/config/g' /etc/minidlna.conf
+
+# add start script - copies minidlna.conf file to/from host
+ADD start.sh /run/minidlna/start.sh
 
 # docker settings
 #################
@@ -34,7 +39,7 @@ RUN chmod -R 775 /run/minidlna/ /usr/bin/minidlnad
 # add conf file
 ###############
 
-ADD svr-minidlna.conf /etc/supervisor/conf.d/svr-minidlna.conf
+ADD minidlna.conf /etc/supervisor/conf.d/minidlna.conf
 
 # cleanup
 #########
