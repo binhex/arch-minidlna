@@ -15,7 +15,7 @@ RUN sed -i 's/media_dir=\/opt/media_dir=\/media/g' /etc/minidlna.conf
 RUN sed -i 's/#db_dir=\/var\/cache\/minidlna/db_dir=\/config/g' /etc/minidlna.conf
 RUN sed -i 's/#log_dir=\/var\/log/log_dir=\/config/g' /etc/minidlna.conf
 
-# add start script - copies minidlna.conf file to/from host
+# add start script - copies custom minidlna.conf file to host
 ADD start.sh /run/minidlna/start.sh
 
 # docker settings
