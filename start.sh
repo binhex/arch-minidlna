@@ -12,4 +12,4 @@ if [ ! -f "/config/minidlna.conf" ]; then
 fi
 
 #run minidlna non daemonized
-/usr/bin/minidlnad -d -R -f /config/minidlna.conf
+/usr/bin/minidlnad -R -f /config/minidlna.conf
