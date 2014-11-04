@@ -10,3 +10,6 @@ if [ ! -f "/config/minidlna.conf" ]; then
 	chown -R nobody:users /config
 		
 fi
+
+#run minidlna non daemonized
+/usr/bin/minidlnad -d -R -f /config/minidlna.conf
