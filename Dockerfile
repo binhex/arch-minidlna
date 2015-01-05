@@ -1,4 +1,4 @@
-FROM binhex/arch-base:2014101300
+FROM binhex/arch-base:2015010500
 MAINTAINER binhex
 
 # additional files
@@ -16,14 +16,14 @@ ADD minidlna.conf /etc/supervisor/conf.d/minidlna.conf
 # install install app using pacman, set perms, cleanup
 RUN pacman -Sy --noconfirm && \
 	pacman -S minidlna --noconfirm && \
-	pacman -Scc --noconfirm && \
 	sed -i 's/media_dir=\/opt/media_dir=\/media/g' /etc/minidlna.conf && \
 	sed -i 's/#db_dir=\/var\/cache\/minidlna/db_dir=\/config/g' /etc/minidlna.conf && \
 	sed -i 's/#log_dir=\/var\/log/log_dir=\/config/g' /etc/minidlna.conf && \	
 	chown -R nobody:users /run/minidlna/ /usr/bin/minidlnad && \
 	chmod -R 775 /run/minidlna/ /usr/bin/minidlnad && \	
-	rm -rf /archlinux/usr/share/locale && \
-	rm -rf /archlinux/usr/share/man && \
+	yes|pacman -Scc && \	
+	rm -rf /usr/share/locale/* && \
+	rm -rf /usr/share/man/* && \
 	rm -rf /root/* && \
 	rm -rf /tmp/*
 
