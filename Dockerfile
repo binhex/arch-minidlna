@@ -4,11 +4,11 @@ MAINTAINER binhex
 # additional files
 ##################
 
+# add supervisor conf file for app
+ADD *.conf /etc/supervisor/conf.d/
+
 # add start script - copies custom minidlna.conf file to host
 ADD start.sh /home/nobody/start.sh
-
-# add supervisor conf file for app
-ADD minidlna.conf /etc/supervisor/conf.d/minidlna.conf
 
 # add install bash script
 ADD install.sh /root/install.sh
@@ -17,7 +17,7 @@ ADD install.sh /root/install.sh
 #############
 
 # make executable and run bash scripts to install app
-RUN chmod +x /root/install.sh /home/nobody/start.sh && \
+RUN chmod +x /root/*.sh /home/nobody/*.sh && \
 	/bin/bash /root/install.sh
 
 # docker settings
