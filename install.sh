@@ -13,8 +13,8 @@ sed -i 's/#db_dir=\/var\/cache\/minidlna/db_dir=\/config/g' /etc/minidlna.conf
 sed -i 's/#log_dir=\/var\/log/log_dir=\/config/g' /etc/minidlna.conf	
 
 # set permissions
-chown -R nobody:users /home/nobody/ /usr/bin/minidlnad
-chmod -R 775 /home/nobody/ /usr/bin/minidlnad
+chown -R nobody:users /home/nobody/ /usr/bin/minidlnad /var/run/minidlna/
+chmod -R 775 /home/nobody/ /usr/bin/minidlnad /var/run/minidlna/
 
 # cleanup
 yes|pacman -Scc
