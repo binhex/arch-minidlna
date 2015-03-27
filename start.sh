@@ -5,8 +5,9 @@ if [ ! -f "/config/minidlna.conf" ]; then
 
 	# copy over customised config
 	cp /etc/minidlna.conf /config/
-	
-	chmod -R 775 /config/
-	chown -R nobody:users /config/
-			
+				
 fi
+
+# set permissions for user nobody
+chmod -R 775 /config/
+chown -R nobody:users /config/
