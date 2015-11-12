@@ -7,7 +7,7 @@ set -e
 pacman_packages="minidlna"
 
 # install pre-reqs
-pacman -Sy --noconfirm
+pacman -Syu --ignore filesystem --noconfirm
 pacman -S --needed $pacman_packages --noconfirm
 
 # set media to point at /media docker volume
