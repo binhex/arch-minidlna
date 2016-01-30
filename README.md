@@ -43,4 +43,4 @@ docker run -d \
 You cannot specify the port the docker container uses, it requires full access to the hosts nic and thus the -p flag is not used.
 Additional configuration for this application can be done by modifying the /config/minidlna.conf file.
 
-[Support forum](http://lime-technology.com/forum/index.php?topic=38055.0)
+[Support forum](http://lime-technology.com/forum/index.php?topic=45841.0)
