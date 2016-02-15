@@ -5,13 +5,13 @@ MAINTAINER binhex
 ##################
 
 # add supervisor conf file for app
-ADD *.conf /etc/supervisor/conf.d/
+ADD setup/*.conf /etc/supervisor/conf.d/
 
 # add start script - copies custom minidlna.conf file to host
-ADD start.sh /home/nobody/start.sh
+ADD setup/start.sh /home/nobody/start.sh
 
 # add install bash script
-ADD install.sh /root/install.sh
+ADD setup/install.sh /root/install.sh
 
 # install app
 #############
@@ -29,8 +29,8 @@ VOLUME /config
 # map /media to host defined media path (used to read/write to media library)
 VOLUME /media
 
-# run supervisor
-################
+# set permissions
+#################
 
-# run supervisor
-CMD ["supervisord", "-c", "/etc/supervisor.conf", "-n"]
+# run script to set uid, gid and permissions
+CMD ["/bin/bash", "/root/init.sh"]

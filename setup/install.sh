@@ -25,10 +25,6 @@ sed -i 's/user=minidlna/user=nobody/g' /etc/minidlna.conf
 # set friendly name to MiniDLNA
 sed -i 's/#friendly_name=My DLNA Server/friendly_name=MiniDLNA/g' /etc/minidlna.conf
 
-# set permissions
-chown -R nobody:users /usr/bin/minidlnad
-chmod -R 775 /usr/bin/minidlnad
-
 # cleanup
 yes|pacman -Scc
 rm -rf /usr/share/locale/*
