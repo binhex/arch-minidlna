@@ -38,8 +38,8 @@ else
 fi
 
 # set permissions inside container
-chown -R "${UID}":"${GID}" /usr/bin/minidlnad
-chmod -R 775 /usr/bin/minidlnad
+chown -R "${UID}":"${GID}" /usr/bin/minidlnad /home/nobody
+chmod -R 775 /usr/bin/minidlnad /home/nobody
 
 echo "[info] Starting Supervisor..."
 
