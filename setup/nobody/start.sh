@@ -5,7 +5,7 @@ if [ ! -f "/config/minidlna.conf" ]; then
 
 	# copy over customised config
 	cp /etc/minidlna.conf /config/
-				
+
 fi
 
 # set permissions for user nobody
