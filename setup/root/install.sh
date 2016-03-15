@@ -4,10 +4,10 @@
 set -e
 
 # define pacman packages
-pacman_packages="minidlna"
+# pacman_packages=""
 
 # install pre-reqs
-pacman -S --needed $pacman_packages --noconfirm
+# pacman -S --needed $pacman_packages --noconfirm
 
 # set media to point at /media docker volume
 sed -i 's/media_dir=\/opt/media_dir=\/media/g' /etc/minidlna.conf
@@ -23,6 +23,9 @@ sed -i 's/user=minidlna/user=nobody/g' /etc/minidlna.conf
 
 # set friendly name to MiniDLNA
 sed -i 's/#friendly_name=My DLNA Server/friendly_name=MiniDLNA/g' /etc/minidlna.conf
+
+# call aor script (arch official repo)
+source /root/aor.sh
 
 # cleanup
 yes|pacman -Scc
