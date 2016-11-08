@@ -8,7 +8,7 @@ cat <<EOF > /etc/cron.d/rescan_media_cron
 EOF
 
 # give execution rights on the cron job
-RUN chmod 0644 /etc/cron.d/rescan_media_cron
+chmod 0644 /etc/cron.d/rescan_media_cron
  
 # run crond in foreground mode (minidlna running as daemon)
 crond -n
