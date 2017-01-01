@@ -92,8 +92,8 @@ export SCAN_ON_BOOT=$(echo "${SCAN_ON_BOOT}" | sed -e 's/^[ \t]*//')
 if [[ ! -z "${SCAN_ON_BOOT}" ]]; then
 	echo "[info] SCAN_ON_BOOT defined as '${SCAN_ON_BOOT}'" | ts '%Y-%m-%d %H:%M:%.S'
 else
-	echo "[warn] SCAN_ON_BOOT not defined,(via -e SCAN_ON_BOOT), defaulting to 'yes'" | ts '%Y-%m-%d %H:%M:%.S'
-	export SCAN_ON_BOOT="yes"
+	echo "[warn] SCAN_ON_BOOT not defined,(via -e SCAN_ON_BOOT), defaulting to 'no'" | ts '%Y-%m-%d %H:%M:%.S'
+	export SCAN_ON_BOOT="no"
 fi
 
 export SCHEDULE_SCAN_DAYS=$(echo "${SCHEDULE_SCAN_DAYS}" | sed -e 's/^[ \t]*//')
