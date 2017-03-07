@@ -21,6 +21,7 @@ docker run -d \
     -e SCHEDULE_SCAN_DAYS=<00-06> \
     -e SCHEDULE_SCAN_HOURS=<00-23> \
     -e SCAN_ON_BOOT=<yes|no> \
+    -e UMASK=<umask for created files> \
     -e PUID=<uid for user> \
     -e PGID=<gid for user> \
     binhex/arch-minidlna
@@ -43,6 +44,7 @@ docker run -d \
     -e SCHEDULE_SCAN_DAYS=06 \
     -e SCHEDULE_SCAN_HOURS=02 \
     -e SCAN_ON_BOOT=no \
+    -e UMASK=000 \
     -e PUID=0 \
     -e PGID=0 \
     binhex/arch-minidlna
