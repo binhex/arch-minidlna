@@ -67,9 +67,13 @@ sed -i 's~#friendly_name=My DLNA Server~friendly_name=MiniDLNA~g' /etc/minidlna.
 
 # create file with contets of here doc
 cat <<'EOF' > /tmp/permissions_heredoc
+
+# create path to store minidlna pid file
+mkdir -p /var/run/minidlna
+
 # set permissions inside container
-chown -R "${PUID}":"${PGID}" /usr/bin/minidlnad /home/nobody
-chmod -R 775 /usr/bin/minidlnad /home/nobody
+chown -R "${PUID}":"${PGID}" /usr/bin/minidlnad /home/nobody /var/run/minidlna
+chmod -R 775 /usr/bin/minidlnad /home/nobody /var/run/minidlna
 
 EOF
 
