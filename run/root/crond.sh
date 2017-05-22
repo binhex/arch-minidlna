@@ -1,9 +1,12 @@
 #!/bin/bash
 
 # add in cron job to rescan media
-#cat <<EOF > /etc/cron.d/rescan_media_cron
+cat <<EOF > /etc/cron.d/rescan_media_cron
 # scheduled task to rescan media library
-00 "${SCHEDULE_SCAN_HOURS}" * * "${SCHEDULE_SCAN_DAYS}" pkill -f minidlnad ; /usr/bin/minidlnad -R -f /config/minidlna.conf -P /home/nobody/.config/minidlna/minidlna.pid
+00 "${SCHEDULE_SCAN_HOURS}" * * "${SCHEDULE_SCAN_DAYS}" \
+pkill -f minidlnad ; \
+rm -f /home/nobody/.config/minidlna/minidlna.pid ; \
+/usr/bin/minidlnad -R -f /config/minidlna.conf -P /home/nobody/.config/minidlna/minidlna.pid
 
 EOF
 
