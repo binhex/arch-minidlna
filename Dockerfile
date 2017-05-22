@@ -7,8 +7,8 @@ MAINTAINER binhex
 # add supervisor conf file for app
 ADD build/*.conf /etc/supervisor/conf.d/
 
-# add install bash script
-ADD build/root/*.sh /root/
+# add run bash script
+ADD run/root/*.sh /root/
 
 # add run bash script
 ADD run/nobody/*.sh /home/nobody/
