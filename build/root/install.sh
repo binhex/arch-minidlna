@@ -89,7 +89,7 @@ rm /tmp/permissions_heredoc
 
 # create file with contets of here doc
 cat <<'EOF' > /tmp/envvars_heredoc
-export SCAN_ON_BOOT=$(echo "${SCAN_ON_BOOT}" | sed -e 's/^[ \t]*//')
+export SCAN_ON_BOOT=$(echo "${SCAN_ON_BOOT}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
 if [[ ! -z "${SCAN_ON_BOOT}" ]]; then
 	echo "[info] SCAN_ON_BOOT defined as '${SCAN_ON_BOOT}'" | ts '%Y-%m-%d %H:%M:%.S'
 else
@@ -97,7 +97,7 @@ else
 	export SCAN_ON_BOOT="no"
 fi
 
-export SCHEDULE_SCAN_DAYS=$(echo "${SCHEDULE_SCAN_DAYS}" | sed -e 's/^[ \t]*//')
+export SCHEDULE_SCAN_DAYS=$(echo "${SCHEDULE_SCAN_DAYS}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
 if [[ ! -z "${SCHEDULE_SCAN_DAYS}" ]]; then
 	echo "[info] SCHEDULE_SCAN_DAYS defined as '${SCHEDULE_SCAN_DAYS}'" | ts '%Y-%m-%d %H:%M:%.S'
 else
@@ -105,7 +105,7 @@ else
 	export SCHEDULE_SCAN_DAYS="06"
 fi
 
-export SCHEDULE_SCAN_HOURS=$(echo "${SCHEDULE_SCAN_HOURS}" | sed -e 's/^[ \t]*//')
+export SCHEDULE_SCAN_HOURS=$(echo "${SCHEDULE_SCAN_HOURS}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
 if [[ ! -z "${SCHEDULE_SCAN_HOURS}" ]]; then
 	echo "[info] SCHEDULE_SCAN_HOURS defined as '${SCHEDULE_SCAN_HOURS}'" | ts '%Y-%m-%d %H:%M:%.S'
 else
