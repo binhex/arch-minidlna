@@ -65,15 +65,32 @@ sed -i 's~#friendly_name=My DLNA Server~friendly_name=MiniDLNA~g' /etc/minidlna.
 # container perms
 ####
 
-# create file with contets of here doc
-cat <<'EOF' > /tmp/permissions_heredoc
+# define comma separated list of paths 
+install_paths="/home/nobody,/var/run/minidlna"
 
-# create path to store minidlna pid file
-mkdir -p /var/run/minidlna
+# split comma separated string into list for install paths
+IFS=',' read -ra install_paths_list <<< "${install_paths}"
 
+# process install paths in the list
+for i in "${install_paths_list[@]}"; do
+
+	# confirm path(s) exist, if not then exit
+	if [[ ! -d "${i}" ]]; then
+		echo "[crit] Path '${i}' does not exist, exiting build process..." ; exit 1
+	fi
+
+done
+
+# convert comma separated string of install paths to space separated, required for chmod/chown processing
+install_paths=$(echo "${install_paths}" | tr ',' ' ')
+
+# create file with contents of here doc, note EOF is NOT quoted to allow us to expand current variable 'install_paths'
+# we use escaping to prevent variable expansion for PUID and PGID, as we want these expanded at runtime of init.sh
+# note - do NOT double quote variable for install_paths otherwise this will wrap space separated paths as a single string
+cat <<EOF > /tmp/permissions_heredoc
 # set permissions inside container
-chown -R "${PUID}":"${PGID}" /usr/bin/minidlnad /home/nobody /var/run/minidlna
-chmod -R 775 /usr/bin/minidlnad /home/nobody /var/run/minidlna
+chown -R "\${PUID}":"\${PGID}" ${install_paths}
+chmod -R 775 ${install_paths}
 
 EOF
 
