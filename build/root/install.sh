@@ -66,7 +66,7 @@ sed -i 's~#friendly_name=My DLNA Server~friendly_name=MiniDLNA~g' /etc/minidlna.
 ####
 
 # define comma separated list of paths 
-install_paths="/home/nobody,/var/run/minidlna"
+install_paths="/home/nobody"
 
 # split comma separated string into list for install paths
 IFS=',' read -ra install_paths_list <<< "${install_paths}"
