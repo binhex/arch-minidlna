@@ -15,11 +15,25 @@ unzip /tmp/scripts-master.zip -d /tmp
 # move shell scripts to /root
 mv /tmp/scripts-master/shell/arch/docker/*.sh /root/
 
+# custom
+####
+
+# due to updates for package dependancies for minidlna its necesssary to perform
+# a full system update with the latest packages. Whilst this is not ideal 
+# (results in a larger docker image due to unique package versions and thus less
+# caching of layers) it is the only easy way around this issue at this time.
+
+# overwrite archive mirrorlist with up to date UK mirrorlist
+echo 'Server = http://mirror.bytemark.co.uk/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
+
+# issue full os update
+pacman -Syu --noconfirm
+
 # pacman packages
 ####
 
 # define pacman packages
-pacman_packages="cronie"
+pacman_packages="cronie minidlna"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
@@ -30,7 +44,7 @@ fi
 ####
 
 # define arch official repo (aor) packages
-aor_packages="minidlna"
+aor_packages=""
 
 # call aor script (arch official repo)
 source /root/aor.sh
