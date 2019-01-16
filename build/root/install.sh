@@ -3,6 +3,13 @@
 # exit script if return code != 0
 set -e
 
+# resetting to live repo and using pacman for this app.
+echo 'Server = http://mirror.bytemark.co.uk/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
+echo 'Server = http://archlinux.mirrors.uk2.net/$repo/os/$arch' >> /etc/pacman.d/mirrorlist
+
+# sync package databases for pacman
+pacman -Syyu --noconfirm
+
 # build scripts
 ####
 
@@ -15,20 +22,6 @@ unzip /tmp/scripts-master.zip -d /tmp
 # move shell scripts to /root
 mv /tmp/scripts-master/shell/arch/docker/*.sh /root/
 
-# custom
-####
-
-# due to updates for package dependancies for minidlna its necesssary to perform
-# a full system update with the latest packages. Whilst this is not ideal 
-# (results in a larger docker image due to unique package versions and thus less
-# caching of layers) it is the only easy way around this issue at this time.
-
-# overwrite archive mirrorlist with up to date UK mirrorlist
-echo 'Server = http://mirror.bytemark.co.uk/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
-
-# issue full os update
-pacman -Syu --noconfirm
-
 # pacman packages
 ####
 
@@ -39,15 +32,6 @@ pacman_packages="cronie minidlna"
 if [[ ! -z "${pacman_packages}" ]]; then
 	pacman -S --needed $pacman_packages --noconfirm
 fi
-
-# aor packages
-####
-
-# define arch official repo (aor) packages
-aor_packages=""
-
-# call aor script (arch official repo)
-source /root/aor.sh
 
 # aur packages
 ####
