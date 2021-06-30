@@ -18,6 +18,7 @@ docker run -d \
     -v <path for media files>:/media \
     -v <path for config files>:/config \
     -v /etc/localtime:/etc/localtime:ro \
+    -e SCHEDULE_SCAN=<yes|no> \
     -e SCHEDULE_SCAN_DAYS=<00-06> \
     -e SCHEDULE_SCAN_HOURS=<00-23> \
     -e SCAN_ON_BOOT=<yes|no> \
@@ -41,6 +42,7 @@ docker run -d \
     -v /media/pictures:/media \
     -v /apps/docker/minidlna:/config \
     -v /etc/localtime:/etc/localtime:ro \
+    -e SCHEDULE_SCAN=yes \
     -e SCHEDULE_SCAN_DAYS=06 \
     -e SCHEDULE_SCAN_HOURS=02 \
     -e SCAN_ON_BOOT=no \

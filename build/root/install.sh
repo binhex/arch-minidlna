@@ -140,6 +140,14 @@ else
 	export SCAN_ON_BOOT="no"
 fi
 
+export SCHEDULE_SCAN=$(echo "${SCHEDULE_SCAN}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+if [[ ! -z "${SCHEDULE_SCAN}" ]]; then
+	echo "[info] SCHEDULE_SCAN defined as '${SCHEDULE_SCAN}'" | ts '%Y-%m-%d %H:%M:%.S'
+else
+	echo "[warn] SCHEDULE_SCAN not defined,(via -e SCHEDULE_SCAN), defaulting to 'yes'" | ts '%Y-%m-%d %H:%M:%.S'
+	export SCHEDULE_SCAN="yes"
+fi
+
 export SCHEDULE_SCAN_DAYS=$(echo "${SCHEDULE_SCAN_DAYS}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
 if [[ ! -z "${SCHEDULE_SCAN_DAYS}" ]]; then
 	echo "[info] SCHEDULE_SCAN_DAYS defined as '${SCHEDULE_SCAN_DAYS}'" | ts '%Y-%m-%d %H:%M:%.S'
