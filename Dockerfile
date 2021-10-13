@@ -11,6 +11,9 @@ ADD build/*.conf /etc/supervisor/conf.d/
 # add build bash script
 ADD build/root/*.sh /root/
 
+# get release tag name from build arg
+ARG release_tag_name
+
 # add run bash script
 ADD run/root/*.sh /root/
 
@@ -22,7 +25,7 @@ ADD run/nobody/*.sh /home/nobody/
 
 # make executable and run bash scripts to install app
 RUN chmod +x /root/*.sh /home/nobody/*.sh && \
-	/bin/bash /root/install.sh
+	/bin/bash /root/install.sh "${release_tag_name}"
 
 # docker settings
 #################
