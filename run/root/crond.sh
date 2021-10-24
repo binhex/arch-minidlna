@@ -1,5 +1,6 @@
 #!/bin/bash
 
+if [[ "${SCHEDULE_SCAN}" = "yes" ]]; then
 # add in cron job to rescan media
 cat <<EOF > /etc/cron.d/rescan_media_cron
 # scheduled task to rescan media library
@@ -12,6 +13,7 @@ EOF
 
 # give execution rights on the cron job
 chmod 0644 /etc/cron.d/rescan_media_cron
+fi
  
 # run crond in foreground mode (minidlna running as daemon)
 crond -n
