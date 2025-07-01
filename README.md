@@ -16,7 +16,6 @@ Latest stable release of MiniDLNA.
 
 ```bash
 docker run -d \
-
     --net="host" \
     --name=<container name> \
     -v <path for media files>:/media \
@@ -28,9 +27,7 @@ docker run -d \
     -e UMASK=<umask for created files> \
     -e PUID=<uid for user> \
     -e PGID=<gid for user> \
-
     binhex/arch-minidlna
-
 ```
 
 Please replace all user variables in the above command defined by <> with the
@@ -44,7 +41,6 @@ N/A, CLI only.
 
 ```bash
 docker run -d \
-
     --net="host" \
     --name=minidlna \
     -v /media/pictures:/media \
@@ -56,9 +52,7 @@ docker run -d \
     -e UMASK=000 \
     -e PUID=0 \
     -e PGID=0 \
-
     binhex/arch-minidlna
-
 ```
 
 ## Notes
@@ -68,7 +62,6 @@ for the user you want to run the container as:-
 
 ```bash
 id <username>
-
 ```
 
 You cannot specify the port the docker container uses, it requires full access
