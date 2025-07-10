@@ -36,11 +36,11 @@ RUN chmod +x /root/*.sh /home/nobody/*.sh && \
 # ensure internet connectivity, used primarily when sharing network with other conainers
 HEALTHCHECK --interval=1m --timeout=3s \
   CMD curl -s https://github.com &>/dev/null || kill 1
-	
+
 #################
 
 # set permissions
 #################
 
 # run script to set uid, gid and permissions
-CMD ["/bin/bash", "/usr/local/bin/init.sh"]
+CMD ["/bin/bash", "init.sh"]
