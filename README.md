@@ -24,6 +24,8 @@ docker run -d \
     -e SCHEDULE_SCAN_DAYS=<00-06> \
     -e SCHEDULE_SCAN_HOURS=<00-23> \
     -e SCAN_ON_BOOT=<yes|no> \
+    -e HEALTHCHECK_COMMAND=<command> \
+    -e HEALTHCHECK_ACTION=<action> \
     -e UMASK=<umask for created files> \
     -e PUID=<uid for user> \
     -e PGID=<gid for user> \
