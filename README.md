@@ -24,6 +24,8 @@ docker run -d \
     -e SCHEDULE_SCAN_DAYS=<00-06> \
     -e SCHEDULE_SCAN_HOURS=<00-23> \
     -e SCAN_ON_BOOT=<yes|no> \
+    -e ENABLE_STARTUP_SCRIPTS=<yes|no> \
+    -e STARTUP_SCRIPTS_MODE=<wait|parallel> \
     -e HEALTHCHECK_COMMAND=<command> \
     -e HEALTHCHECK_ACTION=<action> \
     -e HEALTHCHECK_HOSTNAME=<hostname> \
@@ -52,6 +54,8 @@ docker run -d \
     -e SCHEDULE_SCAN_DAYS=06 \
     -e SCHEDULE_SCAN_HOURS=02 \
     -e SCAN_ON_BOOT=no \
+    -e ENABLE_STARTUP_SCRIPTS=no \
+    -e STARTUP_SCRIPTS_MODE=wait \
     -e UMASK=000 \
     -e PUID=0 \
     -e PGID=0 \
@@ -59,6 +63,14 @@ docker run -d \
 ```
 
 ## Notes
+
+`ENABLE_STARTUP_SCRIPTS` when set to `yes` (default `no`) will allow a user to
+install additional packages from the official Arch Repository or the Arch User
+Repository (AUR) via scripts located in the folder `/config/minidlna/scripts/`.
+
+`STARTUP_SCRIPTS_MODE` controls how those scripts are executed, set to `wait`
+(default) to run each script in turn and wait for it to complete before the next
+script runs, or `parallel` to run all scripts at the same time.
 
 User ID (PUID) and Group ID (PGID) can be found by issuing the following command
 for the user you want to run the container as:-

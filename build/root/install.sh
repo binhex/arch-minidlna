@@ -114,30 +114,25 @@ rm /tmp/permissions_heredoc
 
 # create file with contets of here doc
 cat <<'EOF' > /tmp/envvars_heredoc
-export SCAN_ON_BOOT=$(echo "${SCAN_ON_BOOT}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
-if [[ ! -z "${SCAN_ON_BOOT}" ]]; then
-	echo "[info] SCAN_ON_BOOT defined as '${SCAN_ON_BOOT}'" | ts '%Y-%m-%d %H:%M:%.S'
-else
-	echo "[warn] SCAN_ON_BOOT not defined,(via -e SCAN_ON_BOOT), defaulting to 'no'" | ts '%Y-%m-%d %H:%M:%.S'
-	export SCAN_ON_BOOT="no"
-fi
 
-export SCHEDULE_SCAN_DAYS=$(echo "${SCHEDULE_SCAN_DAYS}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
-if [[ ! -z "${SCHEDULE_SCAN_DAYS}" ]]; then
-	echo "[info] SCHEDULE_SCAN_DAYS defined as '${SCHEDULE_SCAN_DAYS}'" | ts '%Y-%m-%d %H:%M:%.S'
-else
-	echo "[warn] SCHEDULE_SCAN_DAYS not defined,(via -e SCHEDULE_SCAN_DAYS), defaulting to day '06'" | ts '%Y-%m-%d %H:%M:%.S'
-	export SCHEDULE_SCAN_DAYS="06"
-fi
+# source in utility functions, need process_env_var
+source utils.sh
 
-export SCHEDULE_SCAN_HOURS=$(echo "${SCHEDULE_SCAN_HOURS}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
-if [[ ! -z "${SCHEDULE_SCAN_HOURS}" ]]; then
-	echo "[info] SCHEDULE_SCAN_HOURS defined as '${SCHEDULE_SCAN_HOURS}'" | ts '%Y-%m-%d %H:%M:%.S'
-else
-	echo "[warn] SCHEDULE_SCAN_HOURS not defined,(via -e SCHEDULE_SCAN_HOURS), defaulting to hour '02'" | ts '%Y-%m-%d %H:%M:%.S'
-	export SCHEDULE_SCAN_HOURS="02"
-fi
+# Define environment variables to process
+# Format: "VAR_NAME:DEFAULT_VALUE:REQUIRED:MASK"
+env_vars=(
+	"SCAN_ON_BOOT:no:false:false"
+	"SCHEDULE_SCAN_DAYS:06:false:false"
+	"SCHEDULE_SCAN_HOURS:02:false:false"
+	"ENABLE_STARTUP_SCRIPTS:no:false:false"
+	"STARTUP_SCRIPTS_MODE:wait:false:false"
+)
 
+# Process each environment variable
+for env_var in "${env_vars[@]}"; do
+	IFS=':' read -r var_name default_value required mask_value <<< "${env_var}"
+	process_env_var "${var_name}" "${default_value}" "${required}" "${mask_value}"
+done
 EOF
 
 # replace envvars placeholder string with contents of file (here doc)
